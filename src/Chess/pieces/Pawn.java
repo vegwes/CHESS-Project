@@ -4,6 +4,10 @@ import Chess.Piece;     // Imports Abstractclass
 import Chess.Color;     // Imports color
 import Chess.Position;  // Imports position
 import Chess.PieceType;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import Chess.Board;
 /**
  * represents a pawn on the board.
@@ -19,6 +23,8 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Position pos, Board board){
+        Piece targetPiece = board.getPiece(pos);
+        if (targetPiece != null && targetPiece.getColor() == this.color) return false;
         if (!board.OnBoardCheck(pos)) return false;
         int rowDiff = pos.row() - position.row();
         int colDiff = Math.abs(pos.col() - position.col());
@@ -38,5 +44,19 @@ public class Pawn extends Piece {
         // Move diagonaly when attacking. 
         if (rowDiff == forward && colDiff == 1 && target != null && target.color != color) return true;
         return false;
+    }
+
+    public List<Position> getValidMoves(Board board) {
+        List<Position> validMoves = new ArrayList<>();
+        for (int r = 0; r < 8; r++){
+            for (int c = 0; c < 8; c++){
+                Position cellPos = new Position(r,c);
+
+                if(this.isValidMove(cellPos, board)){
+                    validMoves.add(cellPos);
+                }
+            }
+        }
+        return validMoves;
     }
 }

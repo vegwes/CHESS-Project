@@ -1,4 +1,5 @@
-## Created all classes needed for the functionality in the folder Chess.
-## View is supposed to hold the GUI.
-## partly Implemented constructor for Pieces, Board, Color, Piecetype.
+##Project divided in three parts, a Chess folder that handles all functionality in the project.
+The view folder handles the GUI, the visual experience.
+Main combines them to a fully functional chessgame. 
+
 

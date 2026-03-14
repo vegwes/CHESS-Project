@@ -62,20 +62,22 @@ public class Game {
         }
 
         boolean moved = board.movePiece(from, to);
-        if (!moved) {
-            return false;
+        if (moved) {
+            switchPlayer();
+            return true;
         }
+        return false;
+    }
 
-        // Her kunne du senere oppdatere status til CHECK/CHECKMATE/STALEMATE/DRAW
-        // ved å skrive egne hjelpe‑metoder som analyserer brettet.
-        status = GameStatus.IN_PROGRESS;
-        switchPlayer();
-        return true;
+        public Color getCurrentTurn(){
+            return this.currentPlayer;
+        
     }
 
     private void switchPlayer() {
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
+
 
     private boolean isInCheck(Color color) {
         //implement method to check if the king is in check

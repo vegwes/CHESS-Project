@@ -92,15 +92,17 @@ public class Board {
      * @param end the position to move the piece to.
      * @return whether the path is clear.
      */
-    public boolean pathCheck(Position start, Position end){
+    public boolean pathCheck(Position start, Position end) {
         int rowStep = Integer.compare(end.row(), start.row());
         int colStep = Integer.compare(end.col(), start.col());
-
+    
         int currRow = start.row() + rowStep;
         int currCol = start.col() + colStep;
-
-        while (currRow != end.row() || currCol != end.col()){
-            if (grid[currRow][currCol] != null){
+    
+  
+        while (currRow != end.row() || currCol != end.col()) {
+            if (currRow < 0 || currRow > 7 || currCol < 0 || currCol > 7) return false;
+            if (grid[currRow][currCol] != null) {
                 return false;
             }
             currRow += rowStep;
@@ -109,3 +111,5 @@ public class Board {
         return true;
     }
 }
+
+

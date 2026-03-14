@@ -1,4 +1,8 @@
 package Chess;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Super class, defines must haves for all the different type of pieces in chess.
  * @author Vegard Westermoen
@@ -40,7 +44,26 @@ public abstract class Piece {
      * This method updates the position your current piece is in.
      * @param position the position on the board.
      */
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPosition(Position newPos) {
+        this.position = newPos;
     }
+
+    public List<Position> getValidMoves(Board board){
+        List<Position> validMoves = new ArrayList<>();
+        for (int r = 0; r < 8; r++){
+            for (int c = 0; c < 8; c++){
+                Position cellPos = new Position(r,c);
+
+                if(this.isValidMove(cellPos, board)){
+                    validMoves.add(cellPos);
+                }
+            }
+        }
+        return validMoves;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
 }
