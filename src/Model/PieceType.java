@@ -1,4 +1,4 @@
-package ChessModel;
+package Model;
 
 /**
  * Represents the different types of chess pieces.

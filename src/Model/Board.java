@@ -1,6 +1,6 @@
-package ChessModel;
-import ChessModel.Piece;
-import ChessModel.pieces.*;
+package Model;
+
+import Model.pieces.*;
 
  /**
   * Represents the board in a chess game.
@@ -53,6 +53,8 @@ public class Board {
         if (!OnBoardCheck(pos)) return null;
         return grid[pos.row()][pos.col()];
     }
+
+    
 
     /**
      * Checks if the given position is on the board.

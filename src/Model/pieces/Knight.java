@@ -1,13 +1,13 @@
-package ChessModel.pieces;
+package Model.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ChessModel.Board;
-import ChessModel.Color;
-import ChessModel.Piece;
-import ChessModel.PieceType;
-import ChessModel.Position;
+import Model.Board;
+import Model.Color;
+import Model.Piece;
+import Model.PieceType;
+import Model.Position;
 /**
  * Represents a knight on the board.
  */
