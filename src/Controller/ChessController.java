@@ -3,9 +3,7 @@ package Controller;
 import View.*;
 
 import java.awt.event.MouseEvent;
-
-import Model.IGameModel;
-import Model.Position;
+import Model.*;
 
 import java.awt.event.MouseAdapter;
 
