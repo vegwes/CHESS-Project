@@ -1,7 +1,8 @@
-package Chess;
-    /**
-     * Represents the different types of chess pieces.
-     */
+package ChessModel;
+
+/**
+ * Represents the different types of chess pieces.
+ */
 public enum PieceType {
     PAWN,
     ROOK,

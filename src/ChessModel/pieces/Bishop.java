@@ -1,14 +1,13 @@
-package Chess.pieces;
-
-import Chess.Piece; // Imports Abstractclass
-import Chess.Color; // Imports color
-import Chess.Position; // Imports position
-import Chess.PieceType;
+package ChessModel.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Chess.Board;
+import ChessModel.Board;
+import ChessModel.Color;
+import ChessModel.Piece;
+import ChessModel.PieceType;
+import ChessModel.Position;
 
 /**
  * represents a bishop on the board.
@@ -27,20 +26,17 @@ public class Bishop extends Piece {
 
     @Override
         public boolean isValidMove(Position pos, Board board) {
-            // 1. Kan ikke stå stille
+
             if (this.position.equals(pos)) return false;
-        
-            // 2. Kan ikke ta egne brikker
+
             Piece target = board.getPiece(pos);
             if (target != null && target.color == this.color) return false;
         
-            // 3. MÅ være diagonalt
             int rowDiff = Math.abs(pos.row() - position.row());
             int colDiff = Math.abs(pos.col() - position.col());
             
             if (rowDiff != colDiff) return false;
         
-            // 4. Veien må være klar
             return board.pathCheck(this.position, pos);
         }
 

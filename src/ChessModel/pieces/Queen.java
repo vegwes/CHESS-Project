@@ -1,24 +1,24 @@
-package Chess.pieces;
-
-import Chess.Piece; // Imports Abstractclass
-import Chess.Color; // Imports color
-import Chess.Position; // Imports position
-import Chess.PieceType;
+package ChessModel.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Chess.Board;
+import ChessModel.Board;
+import ChessModel.Color;
+import ChessModel.Piece;
+import ChessModel.PieceType;
+import ChessModel.Position;
 
 /**
- * represents a king on the board.
+ * Represents a queen on a board.
  */
-public class King extends Piece {
+public class Queen extends Piece {
+
     /**
-     * initializes and creates a new piece(king).
+     * initializes and creates a new piece(queen).
      */
-    public King(Color color, Position position) {
-        super(color, PieceType.KING, position);
+    public Queen(Color color, Position position) {
+        super(color, PieceType.QUEEN, position);
     }
 
     @Override
@@ -27,12 +27,12 @@ public class King extends Piece {
         if (targetPiece != null && targetPiece.getColor() == this.color) return false;
         if (!board.OnBoardCheck(pos))
             return false;
-        Piece target = board.getPiece(pos);
-        if (target != null && target.color == this.color)
+        if (!board.pathCheck(position, pos))
             return false;
         int rowDiff = Math.abs(pos.row() - position.row());
         int colDiff = Math.abs(pos.col() - position.col());
-        return rowDiff <= 1 && colDiff <= 1 && (rowDiff != 0 || colDiff != 0);
+        if (rowDiff==0 && colDiff==0) return false;
+        return rowDiff == colDiff || rowDiff == 0 || colDiff == 0;
     }
 
     public List<Position> getValidMoves(Board board) {

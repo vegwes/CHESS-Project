@@ -2,6 +2,11 @@ package View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import ChessModel.Game;
+import ChessModel.Piece;
+import ChessModel.Position;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,10 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.awt.Graphics2D;
-import Chess.Piece;
-import Chess.Position;
-
-import Chess.Game;
 
 
 public class ChessView extends JPanel {
@@ -88,7 +89,7 @@ public class ChessView extends JPanel {
         }
         if (selectedPosition != null){
             Graphics2D g2 = (Graphics2D) g;
-            g.setColor(new Color(0,0,255,100));
+            g.setColor(new Color(100,200,0,128));
             g2.setStroke(new BasicStroke(5));
             g.drawRect(selectedPosition.col() * TILE_SIZE, (7-selectedPosition.row()) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             g2.setStroke(new BasicStroke(1));
@@ -98,7 +99,7 @@ public class ChessView extends JPanel {
             if (selectedPiece != null && selectedPiece.getColor() == game.getCurrentTurn()){
 
                 List<Position> validMoves = selectedPiece.getValidMoves(game.getBoard());
-                g.setColor(new java.awt.Color(0, 0, 255, 100));
+                g.setColor(new java.awt.Color(100, 200, 0, 128));
                 
                 for (Position move : validMoves){
                     int centerX = move.col() * TILE_SIZE + TILE_SIZE / 2;

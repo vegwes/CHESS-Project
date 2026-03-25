@@ -1,14 +1,13 @@
-package Chess.pieces;
-
-import Chess.Piece;     // Imports Abstractclass
-import Chess.Color;     // Imports color
-import Chess.Position;  // Imports position
-import Chess.PieceType;
+package ChessModel.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Chess.Board;
+import ChessModel.Board;
+import ChessModel.Color;
+import ChessModel.Piece;
+import ChessModel.PieceType;
+import ChessModel.Position;
 /**
  * Represents a knight on the board.
  */

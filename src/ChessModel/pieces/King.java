@@ -1,25 +1,23 @@
-package Chess.pieces;
-
-import Chess.Piece;
-import Chess.Color;
-import Chess.Position;
-import Chess.PieceType;
+package ChessModel.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Chess.Board;
+import ChessModel.Board;
+import ChessModel.Color;
+import ChessModel.Piece;
+import ChessModel.PieceType;
+import ChessModel.Position;
 
 /**
- * Repreresents a rook on the board.
+ * represents a king on the board.
  */
-public class Rook extends Piece {
-
+public class King extends Piece {
     /**
-     * initializes and creates a new piece(rook).
+     * initializes and creates a new piece(king).
      */
-    public Rook(Color color, Position position) {
-        super(color, PieceType.ROOK, position);
+    public King(Color color, Position position) {
+        super(color, PieceType.KING, position);
     }
 
     @Override
@@ -28,11 +26,12 @@ public class Rook extends Piece {
         if (targetPiece != null && targetPiece.getColor() == this.color) return false;
         if (!board.OnBoardCheck(pos))
             return false;
-        if (!board.pathCheck(position, pos))
+        Piece target = board.getPiece(pos);
+        if (target != null && target.color == this.color)
             return false;
         int rowDiff = Math.abs(pos.row() - position.row());
         int colDiff = Math.abs(pos.col() - position.col());
-        return (colDiff > 0 && rowDiff == 0 || rowDiff > 0 && colDiff == 0);
+        return rowDiff <= 1 && colDiff <= 1 && (rowDiff != 0 || colDiff != 0);
     }
 
     public List<Position> getValidMoves(Board board) {

@@ -1,4 +1,4 @@
-package Chess;
+package ChessModel;
  /**
   * Represents the two different sides/colors you can play as in chess.
   */

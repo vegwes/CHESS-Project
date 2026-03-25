@@ -1,6 +1,6 @@
-package Chess;
-import Chess.Piece;
-import Chess.pieces.*;
+package ChessModel;
+import ChessModel.Piece;
+import ChessModel.pieces.*;
 
  /**
   * Represents the board in a chess game.
@@ -110,6 +110,39 @@ public class Board {
         }
         return true;
     }
+
+    public void setPiece(Position pos, Piece piece){
+        grid[pos.row()][pos.col()] = piece;
+    }
+
+    public boolean isInCheck(Color kingColor) {
+        Position kingPos = findKing(kingColor);
+        if (kingPos == null) return false;
+    
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                Piece p = grid[r][c];
+                if (p != null && p.color != kingColor) {
+                    if (p.isValidMove(kingPos, this)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private Position findKing(Color color){
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                Piece piece = grid[i][j];
+                if (piece instanceof King && piece.color == color)
+                    return new Position(i,j);
+            }
+        }
+        return null;
+    }
+
 }
 
 

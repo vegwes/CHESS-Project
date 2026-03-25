@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
+
+import ChessModel.*;
 import View.ChessView;
-import Chess.*;
 
 
 public class Main {
@@ -8,12 +9,12 @@ public class Main {
         Game game = new Game();
         JFrame frame = new JFrame("Sjakk - Vegard Westermoen");
         ChessView view = new ChessView(game);
-
+        
         frame.add(view);
         frame.setSize(640, 670);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
-
+        
     }
 }
