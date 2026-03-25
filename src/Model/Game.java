@@ -1,8 +1,6 @@
-package ChessModel;
+package Model;
 
 import java.util.List;
-
-import ChessModel.pieces.*;
 
 /**
  * Represents a chess-game and handles the state of the game. Checks if it can
@@ -11,7 +9,7 @@ import ChessModel.pieces.*;
  * 
  * @author Vegard Westermoen
  */
-public class Game {
+public class Game implements IGameModel{
 
     /**
      * Represents the different states a chess game can be in.
@@ -44,6 +42,7 @@ public class Game {
     }
 
     // gets the current game status
+    @Override
     public GameStatus getStatus() {
         return status;
     }
@@ -55,12 +54,16 @@ public class Game {
      * @param to   the position to move the piece to.
      * @return whether the move was successful or not.
      */
+    @Override
     public boolean makeMove(Position from, Position to) {
         if (status == GameStatus.CHECKMATE)
             return false;
 
         Piece piece = board.getPiece(from);
         if (piece == null || piece.color != currentPlayer)
+            return false;
+
+        if (!piece.isValidMove(to, board))
             return false;
 
         if (!isSafeMove(from, to, currentPlayer))
@@ -83,19 +86,38 @@ public class Game {
 
     }
 
+    @Override
+    public List<Position> getLegalMovesForPiece(Position pos) {
+        Piece piece = board.getPiece(pos);
+        if (piece == null) return new java.util.ArrayList<>();
+
+        // Her henter vi de "mekaniske" trekkene fra brikken (fra Piece-filene)
+        List<Position> potential = piece.getValidMoves(board);
+        List<Position> legal = new java.util.ArrayList<>();
+
+        for (Position to : potential) {
+            // Her bruker vi den isSafeMove-metoden vi skrev tidligere!
+            if (isSafeMove(pos, to, piece.color)) {
+                legal.add(to);
+            }
+        }
+        return legal;
+    }
+    @Override
     public Color getCurrentTurn() {
         return this.currentPlayer;
 
+    }
+
+    @Override
+    public Piece getPiece(Position pos) {
+        return board.getPiece(pos);
     }
 
     private void switchPlayer() {
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
 
-    private boolean hasValidMoves(Color color) {
-        // implement method to check if the king has valid moves
-        return false;
-    }
 
     private boolean isCheckMate(Color color) {
         if (!board.isInCheck(color)) {

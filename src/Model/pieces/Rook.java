@@ -1,24 +1,24 @@
-package ChessModel.pieces;
+package Model.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ChessModel.Board;
-import ChessModel.Color;
-import ChessModel.Piece;
-import ChessModel.PieceType;
-import ChessModel.Position;
+import Model.Board;
+import Model.Color;
+import Model.Piece;
+import Model.PieceType;
+import Model.Position;
 
 /**
- * Represents a queen on a board.
+ * Repreresents a rook on the board.
  */
-public class Queen extends Piece {
+public class Rook extends Piece {
 
     /**
-     * initializes and creates a new piece(queen).
+     * initializes and creates a new piece(rook).
      */
-    public Queen(Color color, Position position) {
-        super(color, PieceType.QUEEN, position);
+    public Rook(Color color, Position position) {
+        super(color, PieceType.ROOK, position);
     }
 
     @Override
@@ -31,8 +31,7 @@ public class Queen extends Piece {
             return false;
         int rowDiff = Math.abs(pos.row() - position.row());
         int colDiff = Math.abs(pos.col() - position.col());
-        if (rowDiff==0 && colDiff==0) return false;
-        return rowDiff == colDiff || rowDiff == 0 || colDiff == 0;
+        return (colDiff > 0 && rowDiff == 0 || rowDiff > 0 && colDiff == 0);
     }
 
     public List<Position> getValidMoves(Board board) {
