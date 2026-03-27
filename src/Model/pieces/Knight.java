@@ -20,6 +20,9 @@ public class Knight extends Piece {
         super(color, PieceType.KNIGHT, position);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public boolean isValidMove(Position pos, Board board){
         Piece targetPiece = board.getPiece(pos);
@@ -31,7 +34,10 @@ public class Knight extends Piece {
         if (target != null && target.color == this.color) return false;
         return (rowDiff ==2 && colDiff ==1) || (rowDiff ==1 && colDiff ==2);
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     public List<Position> getValidMoves(Board board){
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++){

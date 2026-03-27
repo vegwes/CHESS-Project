@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @author Vegard Westermoen
  */
-public class Game implements IGameModel{
+public class Game implements IGameModel {
 
     /**
      * Represents the different states a chess game can be in.
@@ -41,22 +41,20 @@ public class Game implements IGameModel{
         return currentPlayer;
     }
 
-    // gets the current game status
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public GameStatus getStatus() {
         return status;
     }
 
     /**
-     * tries to make a move on the board, if it is not in progress or check.
-     * 
-     * @param from the position of the piece to move.
-     * @param to   the position to move the piece to.
-     * @return whether the move was successful or not.
+     * {@inheritdoc}
      */
     @Override
     public boolean makeMove(Position from, Position to) {
-        if (status == GameStatus.CHECKMATE)
+        if (status == GameStatus.CHECKMATE || status == GameStatus.STALEMATE || status == GameStatus.DRAW)
             return false;
 
         Piece piece = board.getPiece(from);
@@ -75,6 +73,8 @@ public class Game implements IGameModel{
 
             if (isCheckMate(currentPlayer)) {
                 this.status = GameStatus.CHECKMATE;
+            } else if (isStalemate(currentPlayer)) {
+                this.status = GameStatus.STALEMATE;
             } else if (board.isInCheck(currentPlayer)) {
                 this.status = GameStatus.CHECK;
             } else {
@@ -86,10 +86,12 @@ public class Game implements IGameModel{
 
     }
 
+
     @Override
     public List<Position> getLegalMovesForPiece(Position pos) {
         Piece piece = board.getPiece(pos);
-        if (piece == null) return new java.util.ArrayList<>();
+        if (piece == null)
+            return new java.util.ArrayList<>();
 
         // Her henter vi de "mekaniske" trekkene fra brikken (fra Piece-filene)
         List<Position> potential = piece.getValidMoves(board);
@@ -103,6 +105,10 @@ public class Game implements IGameModel{
         }
         return legal;
     }
+
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public Color getCurrentTurn() {
         return this.currentPlayer;
@@ -117,7 +123,6 @@ public class Game implements IGameModel{
     private void switchPlayer() {
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
-
 
     private boolean isCheckMate(Color color) {
         if (!board.isInCheck(color)) {
@@ -143,12 +148,6 @@ public class Game implements IGameModel{
     }
 
     private boolean isSafeMove(Position from, Position to, Color color) {
-        // Implenet mtehod to check if the move we are checking takes the king out of
-        // check.
-        // visst posisjonen vi er på inneholder en brikke som er av den midlertidige
-        // fargen,
-        // gjennomfør movet og sjekk om det er sjakk.
-        // visst det finnes et gyldig trekk, returner false
         Piece fromPiece = board.getPiece(from);
         Piece toPiece = board.getPiece(to);
         board.setPiece(to, fromPiece);
@@ -173,8 +172,21 @@ public class Game implements IGameModel{
     }
 
     private boolean isStalemate(Color color) {
-        // implement method to check if the king is in stalemate
-        return false;
+        if (board.isInCheck(color)) {
+            return false;
+        }
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                Position pos = new Position(r, c);
+                Piece piece = board.getPiece(pos);
+                if (piece != null && piece.color == color) {
+                    List<Position> legal = getLegalMovesForPiece(pos);
+                    if (legal.size() > 0)
+                        return false;
+                }
+            }
+        }
+        return true;
 
     }
 }

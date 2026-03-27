@@ -21,6 +21,9 @@ public class Rook extends Piece {
         super(color, PieceType.ROOK, position);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public boolean isValidMove(Position pos, Board board) {
         Piece targetPiece = board.getPiece(pos);
@@ -33,7 +36,10 @@ public class Rook extends Piece {
         int colDiff = Math.abs(pos.col() - position.col());
         return (colDiff > 0 && rowDiff == 0 || rowDiff > 0 && colDiff == 0);
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     public List<Position> getValidMoves(Board board) {
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++) {

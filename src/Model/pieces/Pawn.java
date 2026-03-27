@@ -20,6 +20,9 @@ public class Pawn extends Piece {
         super(color, PieceType.PAWN, position);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public boolean isValidMove(Position pos, Board board){
         Piece targetPiece = board.getPiece(pos);
@@ -45,6 +48,9 @@ public class Pawn extends Piece {
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public List<Position> getValidMoves(Board board) {
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++){

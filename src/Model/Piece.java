@@ -48,6 +48,11 @@ public abstract class Piece {
         this.position = newPos;
     }
 
+    /**
+     * Gets an arraylist of valid moves for a given piece.
+     * @param board the current board.
+     * @return arraylist of validmoves. 
+     */
     public List<Position> getValidMoves(Board board){
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++){
@@ -61,7 +66,11 @@ public abstract class Piece {
         }
         return validMoves;
     }
-
+    
+    /**
+     * Gets the color for a piece. 
+     * @return color.
+     */
     public Color getColor() {
         return color;
     }

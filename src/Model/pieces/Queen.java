@@ -21,6 +21,9 @@ public class Queen extends Piece {
         super(color, PieceType.QUEEN, position);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public boolean isValidMove(Position pos, Board board) {
         Piece targetPiece = board.getPiece(pos);
@@ -34,7 +37,10 @@ public class Queen extends Piece {
         if (rowDiff==0 && colDiff==0) return false;
         return rowDiff == colDiff || rowDiff == 0 || colDiff == 0;
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     public List<Position> getValidMoves(Board board) {
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++) {

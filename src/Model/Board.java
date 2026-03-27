@@ -5,7 +5,6 @@ import Model.pieces.*;
  /**
   * Represents the board in a chess game.
   * @author Vegard Westermoen
-  * @version 1.0
   */
 public class Board {
     private Piece[][] grid;
@@ -112,11 +111,20 @@ public class Board {
         }
         return true;
     }
-
+    /**
+     * Sets the piece to a position.
+     * @param pos position on the board.
+     * @param piece the given piece. 
+     */
     public void setPiece(Position pos, Piece piece){
         grid[pos.row()][pos.col()] = piece;
     }
 
+    /**
+     * Checks if the king is in check.
+     * @param kingColor the color we are testing for.
+     * @return true or false.
+     */
     public boolean isInCheck(Color kingColor) {
         Position kingPos = findKing(kingColor);
         if (kingPos == null) return false;
@@ -133,7 +141,7 @@ public class Board {
         }
         return false;
     }
-
+    
     private Position findKing(Color color){
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){

@@ -16,14 +16,16 @@ public class Bishop extends Piece {
 
     /**
      * initializes and creates a new piece(bishop).
-     * 
-     * @param color
-     * @param position
+     * @param color black or white.
+     * @param position the position on the board. 
      */
     public Bishop(Color color, Position position) {
         super(color, PieceType.BISHOP, position);
     }
 
+    /***
+     * {@inheritdoc}
+     */
     @Override
         public boolean isValidMove(Position pos, Board board) {
 
@@ -39,7 +41,10 @@ public class Bishop extends Piece {
         
             return board.pathCheck(this.position, pos);
         }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     public List<Position> getValidMoves(Board board) {
         List<Position> validMoves = new ArrayList<>();
         for (int r = 0; r < 8; r++) {
