@@ -6,11 +6,14 @@ import javax.swing.*;
 import Model.*;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,7 @@ public class ChessView extends JPanel {
     public ChessView(IGameModel game) {
         this.game = game;
         loadImages();
+        setPreferredSize(new Dimension(8 * TILE_SIZE, 8 * TILE_SIZE));
     }
 
     /**

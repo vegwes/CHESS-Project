@@ -1,7 +1,7 @@
 package Controller;
 
 import View.*;
-
+import javax.swing.JLabel;
 import java.awt.event.MouseEvent;
 import Model.*;
 
@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 public class ChessController extends MouseAdapter implements IChessController {
   private final IGameModel model;
   private final ChessView view;
+  private final JLabel turnLabel;
   private Position selectedPosition = null;
   private final int TILE_SIZE = 80;
 
@@ -23,10 +24,12 @@ public class ChessController extends MouseAdapter implements IChessController {
    * 
    * @param model takes in the gamemodel.
    * @param view  takes in the view.
+   * @param turnLabel
    */
-  public ChessController(IGameModel model, ChessView view) {
+  public ChessController(IGameModel model, ChessView view, JLabel turnLabel) {
     this.model = model;
     this.view = view;
+    this.turnLabel = turnLabel;
   }
 
   /**
@@ -57,6 +60,7 @@ public class ChessController extends MouseAdapter implements IChessController {
     }
 
     view.setSelectedPosition(selectedPosition);
+    turnLabel.setText("IT'S " + model.getCurrentTurn() + "'S TURN");
     view.repaint();
   }
 }
