@@ -46,6 +46,7 @@ public class Pawn extends Piece {
         // Move diagonaly when attacking. 
         if (rowDiff == forward && colDiff == 1 && target != null && target.color != color) return true;
         return false;
+
     }
 
     /**
